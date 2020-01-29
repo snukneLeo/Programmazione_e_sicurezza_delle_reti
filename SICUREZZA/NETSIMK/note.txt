@@ -1,0 +1,2 @@
+es5 --> non del tutto corretto (rifarlo per esame molto lungo)
+e di conseguenza l'es6

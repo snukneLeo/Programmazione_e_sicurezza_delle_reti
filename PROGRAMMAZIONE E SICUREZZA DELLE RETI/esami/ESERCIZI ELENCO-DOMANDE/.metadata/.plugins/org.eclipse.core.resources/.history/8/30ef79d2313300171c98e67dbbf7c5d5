@@ -1,0 +1,83 @@
+/*
+Implementare un servizio di calcolo remoto: il client spedisce al server due numeri interi e il tipo di operatore (somma, sottrazione, moltiplicazione,
+ divisione) e il server, dopo aver svolto il calcolo, restituisce al client il risultato. Il server gestisce una richiesta alla volta.
+- si discuta la scelta del protocollo di livello trasporto
+- che modifiche occorre fare al server per fargli gestire più richieste contemporaneamente?
+*/
+import java.io.*;
+import java.net.*;
+
+
+class CalcClient
+{
+	public static void main(String args[])
+  {
+    //definisco socket, buffered, stream
+    Socket socket = null;
+    BufferedReader reader = null;
+    PrintStream outStream = null;
+    String [] calcolo = new String[2];
+    int n = 0;
+    char c;
+
+    //creo la socket clientSocket
+    try
+    {
+      socket = new Socket("localhost",1111);
+      System.out.println("Client connesso: " + socket);
+    }
+    catch(Exception e)
+    {
+      System.out.println(e.getMessage());
+    }
+
+    //creo il buffer e lo stream
+    try
+    {
+      reader = new BufferedReader(new InputStreamReader(System.in));
+      outStream = new PrintStream(new BufferedOutputStream(socket.getOutputStream()));
+
+      while(true)
+      {
+        System.out.println("Inserisci un numero: ");
+        n = ((int)reader.readLine());
+        calcolo[0] = n;
+        System.out.println("Inserisci un altro numero: ");
+        n = reader.readLine();
+        calcolo[1] = n;
+        System.out.println("Inserisci un'operatore ('+');('-');('/');('*'): ");
+        c = reader.readLine();
+        calcolo[2] = n;
+        System.out.println("Vuoi continuare? (y/n) ");
+        c = reader.readLine();
+        if(c == 'n')
+          break;
+      }
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+
+      //ora scrivo al server i numeri e operatori
+      for(int i = 0; i < calcolo.length; i++)
+        outStream.println(calcolo[i]);
+
+      //Lettura dal server della risposta
+      String line = null;
+      try
+      {
+        line = new String(reader.readLine());
+        System.out.println("Msg dal server: " + line);
+
+	      //chiusure
+	      reader.close();
+	      outStream.close();
+	      socket.close();
+    	}
+	    catch(Exception e)
+	    {
+	      System.out.println(e.getMessage());
+	    }
+		}
+	}

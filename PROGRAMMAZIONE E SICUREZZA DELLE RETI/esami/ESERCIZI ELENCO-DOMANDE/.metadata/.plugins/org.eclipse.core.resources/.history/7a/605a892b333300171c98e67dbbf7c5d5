@@ -1,0 +1,74 @@
+/*
+Implementare un servizio di calcolo remoto: il client spedisce al server due numeri interi e il tipo di operatore (somma, sottrazione, moltiplicazione,
+ divisione) e il server, dopo aver svolto il calcolo, restituisce al client il risultato. Il server gestisce una richiesta alla volta.
+- si discuta la scelta del protocollo di livello trasporto
+- che modifiche occorre fare al server per fargli gestire più richieste contemporaneamente?
+*/
+
+import java.io.*;
+import java.net.*;
+
+class Server
+{
+  public static void main(String args[])
+  {
+    //creo il socket
+    Socket client = null;
+    ServerSocket server = null;
+    String [] arr = new String [2];
+    String line = null;
+    int i = 0, n = 0;
+
+    try
+    {
+      server = new ServerSocket(1111);
+      System.out.println("Server creato");
+    }
+    catch(IOException e)
+    {
+      System.out.println(e.getMessage());
+    }
+
+    System.out.println("Attesa connessione...");
+
+    //corpo principale
+    try
+    {
+      BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+      BufferedOutputStream outBuffer = new BufferedOutputStream(client.getOutputStream());
+      PrintStream outStream = new PrintStream(outBuffer,true);
+      while((line = reader.readLine()) != null)
+      {
+        arr[i] = line;
+        i++;
+      }
+      switch (arr[2].charAt(0))
+      {
+        case '+':
+          n = Integer.parseInt((arr[0])) + Integer.parseInt((arr[1]));
+        break;
+        case '-':
+            n = Integer.parseInt((arr[0])) - Integer.parseInt((arr[1]));
+        break;
+        case '*':
+            n = Integer.parseInt((arr[0])) * Integer.parseInt((arr[1]));
+        break;
+        case '/':
+            n = Integer.parseInt((arr[0])) / Integer.parseInt((arr[1]));
+        break;
+        default:
+          System.out.println("Errore");
+        break;
+      }
+      outStream.println(n);
+      //chiusure
+      reader.close();
+      outBuffer.close();
+      outStream.close();
+    }
+    catch(IOException e)
+    {
+      System.out.println(e.getMessage());
+    }
+  }
+}

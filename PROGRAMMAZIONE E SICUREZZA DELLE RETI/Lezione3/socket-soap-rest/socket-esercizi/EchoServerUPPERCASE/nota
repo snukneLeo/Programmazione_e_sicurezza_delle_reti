@@ -1,0 +1,15 @@
+un processo in esec sul pc per poter stare in ascolto su una porta sotto la 1024 deve essere in esecuzione sotto root in ubuntu e administrator in windows.
+sudo java nomeeseguibile (EchoServer)
+
+
+
+
+PORTE --> 16 bit
+
+MAC   --> 48 bit
+
+IPv4  --> 32 bit
+
+IPv6  --> 128 bit
+
+C'è una possibilità che se avviamo il server e poi il client subito potrebbe esserci connessione fallita dato che il server nel caso potrebbe metterci un po' di tempo.

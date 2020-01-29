@@ -1,0 +1,22 @@
+1. Cosa succede se lancio da una finestra diversa una nuova istanza del server quando è ancora attiva la prima ?
+Che il server è occupato e mi mostra un errore appunto che l'indirizzo ip è già usato da un'altra istanza del server.
+
+
+2. Modificare il sorgente del server in modo da prendere da linea di comando la porta su cui
+5attendere.
+ok.
+
+
+3. Modificare il sorgente del client in modo da prendere da linea di comando sia: IP del server a
+cui connettersi, porta alla quale connettersi, stringa da inviare per la conversione.
+
+ok.
+
+
+4. Scoprire l'indirizzo IP della propria interfaccia di rete usando il comando (da usare per
+collegarsi al proprio server)
+$ ifconfig
+5. Connettere il proprio client al server del vicino.
+6. Notare l’ordine di chiusura di stream e socket alla fine dei due programmi. Che differenze ci
+sono e perché?
+Ci sono differenze perchè il server chiude prima il socket dato che comunque deve finire prima la connessione.

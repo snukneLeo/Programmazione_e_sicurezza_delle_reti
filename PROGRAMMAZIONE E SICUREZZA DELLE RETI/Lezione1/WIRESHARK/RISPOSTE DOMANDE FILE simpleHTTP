@@ -1,0 +1,137 @@
+1.FATTO
+2. IP sorgente  e IP destinazione 
+
+(PRIMO PACCHETTO)
+
+IP sorgente: 157.27.252.202
+IP destinazione: 157.27.10.10
+
+(SECONDO PACCHETTO)
+
+IP sorgente: 157.27.10.10
+IP destinazione: 157.27.252.202
+
+protocollo di trasporto?
+PROTOCOLLO UDP.
+
+Tipo di protocollo di livello applicazione. Come fa Wireshark a capirlo?
+
+-DNS. Riceve le informazioni da livello inferiore. Lo capisce in base alla porta dal livello inferiore (53).
+
+messaggio contenuto nel payload di livello applicazione?
+www.polito.it: type A, class IN
+
+richiede di risolvere l'indirizzo www.polito.it --> 1° paccehtto
+dà l'indirizzo di IP dell'indirizzo richiesto --> 2° pacchetto
+
+
+3. Prendere in considerazione il pacchetto 3
+-IP sorgente, IP destinazione
+
+IP sorgente: 157.27.252.202
+IP destinazione: 30.192.73.1
+
+1 e 2 pacchetto ho risolto li'indirizzo http in IP e ora con il 3 lo interrogo.
+
+-tipo di protocollo di trasporto?
+TCP.
+
+
+
+-IP sorgente e destinazione sono in qualche modo collegati con i messaggi scambiati a livello applicazione nei primi due pacchetti? 
+Sono sorgente e destinazione per il pacchetto 3. Attarverso il DNS si sono risolti dli indirizzi IP.
+Il primo lancia una query con nome logico polito.it e gli viene fornito il corrispondente indirizzo IP attrarverso il DNS
+
+
+E' possibile fare delle ipotesi su cosa serve il protocollo di livello applicazione dei primi due pacchetti ?
+Per risolvere il nome logico in indirizzo IP per il pacchetto numero 3.
+
+
+
+4. Descrivere la struttura del pacchetto 6
+
+-IP sorgente, IP destinazione
+
+IP sorgente:157.27.252.202
+IP destinazione:130.192.73.1
+
+-tipo di protocollo di trasporto?
+TCP.
+
+-tipo di protocollo di livello applicazione?
+HTTP. Lo capisco dato che il livello di trasporto ha la porta 80 cioè dell'HTTP.è+
+
+
+-Perché prima della trasmissione del primo messaggio HTTP c'è lo scambio di tre
+pacchetti puramente TCP? 
+Perchè i tre messaggi TCP servono per inizializzare la connessione attraverso la stretta di mano a 3 vie e questi 3 messaggi servono per aprire e iniziare la connessione. Infatti il 6 pacchetto è la richiesta vera e propria della pagina HTTP richiesta dall'utente.
+
+-Quali sono i flag settati nell'header TCP di questi tre
+pacchetti?
+Il maximun segment size, ack e la ricezione dell'ack per l'inizio della comunicazione vera e propria.
+
+Primo pacchetto il [SYN]
+Secondo paccehtto il [SYN,ACK]
+Terzi pacchetto il [ACK]
+
+
+5. creare un filtro per visualizzare solo i pacchetti TCP (compresi i pacchetti HTTP) e
+determinarne il numero.
+807 
+
+
+
+6. creare un filtro per visualizzare solo i pacchetti TCP (esclusi i pacchetti HTTP) e
+determinarne il numero.
+
+tcp && !http && !ftp && !ssh per creare un filtro escludendo il tutto.
+
+tcp && !http questo è il filtro.
+673(81.8%)
+
+-Qual è la percentuale sul totale dei pacchetti TCP trovata al punto 5?
+673/807 = 83.39%
+
+
+-A cosa servono tali pacchetti?
+
+-Se il protocollo DNS dei pacchetti 1 e 2 avesse usato il protocollo TCP, quanti pacchetti IP sarebbero stati generati? 
+12 in totale: 3 per aprire la connessione e 3 per chiudere la connessione, 3 per arpire la connessione del secondo pacchetto e 3 per la chiusura.
+Sarebbe stato utile?
+No sarebbe stato inutile dato che con il tcp uso per avre una garanzia.
+Per il trasporto dati con HTTP tra i due indirizzi IP in questione se qualcosa che mi aspetto solo una risposta se non la riesco ad ottenere la richiederò senza l'uso del TCP.
+Se uso il UDP ho 2 pacchetti da trasmettere.
+Se uso il TCP ho 4 pacchetti: uno per la richiesta 1 per la ricezione e uno per l'ack e uno per l'ack di ricezione.
+Poi 3 per aprire la connesione
+e 3 per la chiusura della connesione.
+TCP --> 10 pacchetti
+UDP --> 2 pacchetti
+
+
+7. Selezionare il pacchetto 3 e seguire lo stream TCP col comando da menu Analyze/Follow TCP Stream
+
+-cosa si può leggere?
+I messaggi scambiati con la richiesta HTTP
+
+-qual è il messaggio contenuto nel payload della PDU di livello applicazione?
+Il sito internet www.polito.it
+
+
+Fa vedere il copione ---> cioè chi domanda e chi risponde (richiesta e risposta)
+rosso --> client
+blu --> server
+
+TCP --> tubo che da una parte invii i byte e ti arrivano i byte
+wireshark ti fa vedere quello che viene trasmesso... vedremo tutta la pagina html
+Le cose che vediamo stanno in più pacchetti... nel TCP lo vedo come una sola cosa.
+
+
+
+
+
+
+
+
+
+
+

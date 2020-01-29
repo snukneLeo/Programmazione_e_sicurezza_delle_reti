@@ -1,0 +1,96 @@
+1. che tipo di protocollo di livello datalink è usato? Come fa Wireshark a capirlo?
+
+Ethernet. Lo capisce perchè il pacchetto viene preso direttamente dal dispositivo utilizzato per immaganizzare il paccehtto. In questo caso sa che è Ethernet perchè usa la scheda di rete.
+
+NOTA: Il livello fisico 1 non ha nessuna struttura di tipo header dato che il livello fisico 1 è composto solmanete dai bit stessi che arrivano e viaggiano nella rete stessa.
+
+2. disegnare la PDU di livello datalink indicando il valore dei vari campi
+PDU: è il pacchetto vero e proprio che viene inviato nella rete.
+primi 6 bit sono: DMAC destinazione
+secondi 6 bit sono: SMAC sorgente
+2 bit per TYPE
+PAYLOAD
+4 bit per: FCS --> riconoscimento di eventuali errori di ricezione all'interno del frame stesso.
+
+perchè voglio leggere i primi bit per la destinazione? per sapere se il pacchetto è effettivamente per me e se non lo è allora lo scarto.
+se ricevo qualcosa che non è mio è inutile andarlo ad analizzare dato che se non è mio spreco solamente delle risorse ed energia.
+0000   ff ff ff ff ff ff 00 e0 81 24 dd 64 08 00
+
+0000	 PREAMBOLO
+ 
+ff ff ff ff ff ff INDIRIZZO DESTINAZIONE 
+00 e0 81 24 dd 64 INDIRIZZO SORGENTE
+
+0800 TIPO DEL PROTOCOLLO (IPv4)
+.........$.d.. PAYLOAD (lunghezza totale 213 - 20 = 193)
+
+3. qual è il MAC sorgente ? Di che tipo è: unicast o broadcast ?
+
+Source: TyanComp_24:dd:64 (00:e0:81:24:dd:64) e il tipo è unicast in quanto la sorgente è unica
+TyanComp cosa vuol dire? i primi 3 byte indicano la casa produttrice della scheda di rete.
+
+4. qual è il MAC destinazione ? Di che tipo è: unicast o broadcast ?
+
+Destination: Broadcast (ff:ff:ff:ff:ff:ff). Il tipo di indirizzo è brodcast in quanto l'indirizzo è composto da tutti 1.
+
+5. che tipo di protocollo di livello network è usato? Come fa Wireshark a capirlo?
+
+UDP. Ogni livello incapsula il livello successivo e dato che il primo livello è ottenuto dalla scheda di rete riesco a capire nei livelli successivi i vari protocolli.
+
+6. qual è la lunghezza dell'header IP?
+20 bytes.
+
+7. quali sono gli indirizzi IP sorgente e destinazione?
+Source: 157.27.252.223 (157.27.252.223)
+Destination: 157.27.252.255 (157.27.252.255)
+
+8. che tipo di protocollo di livello trasporto è contenuto in IP? Come fa Wireshark a capirlo?
+UDP, lo sa dal livello precedente (rete) gli è stato comunicato che l'header è di tipo IP e quindi la suddivisone del bit nei diversi campi porta a tale conclusione.
+
+
+9. quali sono le porte sorgente e destinazione a livello trasporto?
+Source port: 631.
+Destination port: 631.
+
+10. creare un filtro per visualizzare solo i pacchetti che hanno ARP come protocollo
+(suggerimento: basta scrivere “arp” nella barra Filter sotto la toolbar; si ricordi di premere
+su APPLY dopo aver scritto “arp”)
+
+11. dopo aver applicato il filtro precedente qual è la percentuale di pacchetti che rimangono
+visualizzati rispetto al totale ? (suggerimento: vedere entrambi i valori nella barra di stato in
+basso)
+
+63,6% (173 su 272)
+
+
+12. creare un filtro per visualizzare solo i pacchetti che hanno sorgente MAC 00:22:19:c7:2b:ee
+(suggerimento: usare l'editor di espressioni; la categoria da selezionare è Ethernet; per
+l'indirizzo MAC usare la notazione esadecimale con i due punti come separatori; si ricordi di
+premere su APPLY dopo aver creato l'espressione)
+
+(eth.addr == 00:22:19:c7:2b:ee)
+oppure vai nel pulsante expression e crei la espressione scegliendo ethernet source
+
+
+
+13. dopo aver applicato il filtro precedente qual è la percentuale di pacchetti che rimangono
+visualizzati rispetto al totale ? (suggerimento: vedere entrambi i valori nella barra di stato in
+basso)
+5,1% (14 su 272)
+
+14. creare un filtro per visualizzare solo i pacchetti che hanno destinazione MAC broadcast
+(suggerimento: nell'editor di espressioni la categoria da usare è Ethernet; per l'indirizzo
+MAC usare la notazione esadecimale con i due punti come separatori; si ricordi di premere
+su APPLY dopo aver creato l'espressione)
+
+(eth.dst == ff:ff:ff:ff:ff:ff)
+
+
+15. dopo aver applicato il filtro precedente qual è la percentuale di pacchetti che rimangono
+visualizzati rispetto al totale ? Sono molti ? Perché ?
+
+83,8% (228 su 272)
+Perchè il cavo in cui mi trovo o la rete in cui mi trovo sarà una rete swicthata e quindi i pacchetti che mi arrivano sono molti di più perchè passano tutti per lì
+La modalità promiscua mi fa raccogliere i pacchetti che viaggiano in rete MA SOLO SULLA MIA RETE NO SU TUTTA LA RETE!!!
+
+

@@ -1,0 +1,108 @@
+Occorre aprire il file busyNetwork.cap con wireshark.
+
+1. Elencare i protocolli di livello applicazione entrano in azione in questa cattura classificandoli in base al livello trasporto utilizzato.
+ 
+LIVELLO APP --> DNS  --> UDP
+		FTP  --> TCP
+		HTTP --> TCP
+		SSH  --> TCP
+		Secure Shell --> protocollo per la sicurezza. Versione SICURA del telnet perchè quello che passa non si legge. Shell --> terminale nero.
+
+
+2. Provare ad analizzare diversi stream TCP con sopra diversi protocolli di livello applicazione. FOLLOW TCP STREAM
+
+HTTP ---------------------------------------
+GET /pub/gentoHTTP/1.1 200 O      -  
+</prGET /icons/blaHTTP/1.1 200 OGET /icons/folHTTP/1.1 200 OGET /pub/gentoHTTP/1.1 200 O-2003 16:42   GET /pub/gentoHTTP/1.1 200 OGET /pub/gentoHTTP/1.1 200 Oiso</a>     13HEAD /pub/gentHTTP/1.1 200 O
+-------------------------------------------------------------------------
+
+FTP ---------------------------------------- FILE TRANSFERT PROTOCOL
+220 ftp.azc.uaUSER anonymous331 Guest logiPASS mozilla@e230 Guest logiSYST
+215 UNIX Type:PWD
+257 "/" is curTYPE I
+200 Type set tPASV
+227 Entering PSIZE /mirrors/500 'SIZE /mirMDTM /mirrors/500 'MDTM /mirRETR /mirrors/550 /mirrors/ePASV
+227 Entering PCWD /mirrors/e250 CWD commanLIST
+150 Binary dat226 Binary TraPASV
+227 Entering PSIZE /mirrors/500 'SIZE /mirMDTM /mirrors/500 'MDTM /mirRETR /mirrors/150 Binary dat226 Binary TraPASV
+227 Entering PSIZE /mirrors/500 'SIZE /mirMDTM /mirrors/500 'MDTM /mirRETR /mirrors/150 Binary dat226 Binary TraPASV
+227 Entering PSIZE /mirrors/500 'SIZE /mirMDTM /mirrors/500 'MDTM /mirRETR /mirrors/550 /mirrors/ePASV
+227 Entering PCWD /mirrors/e250 CWD commanLIST
+150 Binary dat226 Binary TraPASV
+227 Entering PSIZE /mirrors/500 'SIZE /mirMDTM /mirrors/500 'MDTM /mirRETR /mirrors/150 Binary dat226 Binary TraPASV
+227 Entering PSIZE /mirrors/500 'SIZE /mirMDTM /mirrors/500 'MDTM /mirRETR /mirrors/550 /mirrors/ePASV
+227 Entering PCWD /mirrors/e250 CWD commanLIST
+150 Binary dat226 Binary Tra
+-------------------------------------------------------------------------
+
+SSH --------------------------------------------- CIFRATO
+...r...e.%..tI3..gDf.....:.O....>)&_[.h~..|....~L..)Kuf..C....a....S..%.\.H.?j7.:Q./@.i.$...!n..'...2.^.I.....kC...#p............8M....C@
+.8..[......|...lU.M\...<.....2."..k..#..8.+.r"..J....B...f.B.tV...q..<......0#...C.......'.de~.F.@.(eAT.W..?.v3V
+.6a
+O'.J....@.I....].f.'.....P....Kt......O.Wj43OSpsaP.{.E..r^1l.LT ..3.<..:.......G`N;<....l.....K.u.1#....J..cKE..';R9......(..CT..p.r.kqh.M.........0\..>" D..96..M|.:.D.d:.R..%0(...u......Yz.-Y.2.S8x.V.f......O........4..$.+.._e...J..3..g#.6.#..1"..ua..T.a..9J...gQ._.o..b....gL....Q...E.;A."...F....r...5UP.Q0/..._^.I.4.}.B.u.....T.(.C.=......B.....@b..6>J....:.....J.........>.....\.....(..!....9A...(wf....Y.u+.FT.Z.....q.......4...eb.u.>.<|. Se.......k..r.f..K....T..#.......sw...gbA...?....6U...E..
+m&.u.s!q1Z......S0f..a.u.2,..r#..S.gh......q..$E.....*e4.x...........Lh.......F...`..7...
+...U.a..7....0..e^4Q
+T5.#.c.c.^....4%...0Q.Mn}=.!...Z.."lec.|..(.z...4x..;......._9..J-..........;.V...!.....>..D%..2kF3.2g(..%...x.!...K....... ..)J.3
+..Lp..#.DAD.. .aC;.O7.i.a'..
+....)s2*RT
+F}
+!.uA!.B3....6.......B.Z....{`....z.#....".....}3D...C.a:Q..u...#.....O.8.p.....`.?.....)..............
+d.I..)9../K.z.s......".!.c..*m.H;*.;^......(..Z......o@S..e....7..|....}.b..kZ......:........"...l...rW .Z...PR}r~..\.4.V.........?.i.........>..@|.....tCh.k...H.2....#..#"....B..H,SX..;Wk.i.PI.9\}..k>m....;..2..L.).........i.C....-.\F8....../....,..eZ[M.a.t..D.>.5,E8..`......3V1....)6.y.M....~......R... .u.-!U34.....lm..kj.\%..W.."..........S.....}s..xiuX..r......O..U.S.....t.Q...4...&...$Vq..
+..%>..>..J......o.*..z.@......eG....}....C..h....D...M..6.'r.Q/.[h..X/ll.;31<Ik..S......-..C.......t.$.p..3...yy..z;)T..OE.3>..B`W...|.d..\....u9.Q..\..-.S. =..........at....g..{.H@..3..`.P..6NJ....Y!.....0}..v.L~$....av../...G.8....;w..^:..0...y..tj......r.?:.......i.m.X..^.._..^I.....p...A..-/]Y.8...k...CP.g.../ik.
+-------------------------------------------------------------------------
+
+TCP ------------------------------------------
+...r...e.%..tI3..gDf.....:.O....>)&_[.h~..|....~L..)Kuf..C....a....S..%.\.H.?j7.:Q./@.i.$...!n..'...2.^.I.....kC...#p............8M....C@
+.8..[......|...lU.M\...<.....2."..k..#..8.+.r"..J....B...f.B.tV...q..<......0#...C.......'.de~.F.@.(eAT.W..?.v3V
+.6a
+O'.J....@.I....].f.'.....P....Kt......O.Wj43OSpsaP.{.E..r^1l.LT ..3.<..:.......G`N;<....l.....K.u.1#....J..cKE..';R9......(..CT..p.r.kqh.M.........0\..>" D..96..M|.:.D.d:.R..%0(...u......Yz.-Y.2.S8x.V.f......O........4..$.+.._e...J..3..g#.6.#..1"..ua..T.a..9J...gQ._.o..b....gL....Q...E.;A."...F....r...5UP.Q0/..._^.I.4.}.B.u.....T.(.C.=......B.....@b..6>J....:.....J.........>.....\.....(..!....9A...(wf....Y.u+.FT.Z.....q.......4...eb.u.>.<|. Se.......k..r.f..K....T..#.......sw...gbA...?....6U...E..
+m&.u.s!q1Z......S0f..a.u.2,..r#..S.gh......q..$E.....*e4.x...........Lh.......F...`..7...
+...U.a..7....0..e^4Q
+T5.#.c.c.^....4%...0Q.Mn}=.!...Z.."lec.|..(.z...4x..;......._9..J-..........;.V...!.....>..D%..2kF3.2g(..%...x.!...K....... ..)J.3
+..Lp..#.DAD.. .aC;.O7.i.a'..
+....)s2*RT
+F}
+!.uA!.B3....6.......B.Z....{`....z.#....".....}3D...C.a:Q..u...#.....O.8.p.....`.?.....)..............
+d.I..)9../K.z.s......".!.c..*m.H;*.;^......(..Z......o@S..e....7..|....}.b..kZ......:........"...l...rW .Z...PR}r~..\.4.V.........?.i.........>..@|.....tCh.k...H.2....#..#"....B..H,SX..;Wk.i.PI.9\}..k>m....;..2..L.).........i.C....-.\F8....../....,..eZ[M.a.t..D.>.5,E8..`......3V1....)6.y.M....~......R... .u.-!U34.....lm..kj.\%..W.."..........S.....}s..xiuX..r......O..U.S.....t.Q...4...&...$Vq..
+..%>..>..J......o.*..z.@......eG....}....C..h....D...M..6.'r.Q/.[h..X/ll.;31<Ik..S......-..C.......t.$.p..3...yy..z;)T..OE.3>..B`W...|.d..\....u9.Q..\..-.S. =..........at....g..{.H@..3..`.P..6NJ....Y!.....0}..v.L~$....av../...G.8....;w..^:..0...y..tj......r.?:.......i.m.X..^.._..^I.....p...A..-/]Y.8...k...CP.g.../ik.
+--------------------------------------------------------------------
+3. Che differenza c'e' tra il contenuto trasmesso in una connessione TCP per il protocollo FTP e quello trasmesso per il protocollo SSH?
+La porta del tcp per ftp è 21
+La porta del tcp per ssh è 22
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

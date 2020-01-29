@@ -1,0 +1,3 @@
+javac EsempioURL.java --> genera il file .class
+java EsempioURL www.google.it --> si connette all'url specificato ed eseguo il programma
+

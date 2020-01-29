@@ -1,0 +1,11 @@
+USO UDP --> quando la dimensione è "predicibile"
+	--> e sono nel caso di botta e risposta
+	devono valere entrambe
+USO TCP --> quando non sono dentro i casi detti prima
+	--> e non so quanti dati ho da trasmettere e ricevere
+	--> e non sono in una botta e risposta
+
+BLOCCANTE --> accept() //tcp
+	  --> readLine() //tcp
+	  --> receved() //udp
+NOTA: la accept() nel lato client non è bloccante... Infatti se mi connetto senza un server connesso 	   termino e non aspetto.
